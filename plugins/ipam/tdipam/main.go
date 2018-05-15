@@ -33,6 +33,16 @@ func (IpamS *IpamConfig) Load(bytes []byte) error {
 	//fmt.Println("type:", reflect.TypeOf(IpamS.Ipam.Etcdcluster))
 }
 
+//etcd的node节点路劲
+func EtcdKeyRoad() *KeyNode{
+	var Keynode *KeyNode
+	Keynode = new(KeyNode)
+	Keynode.NodeNetwork = "/prod/nodenetwork/"
+	Keynode.AlreadyUsedIp = "/prod/containernetwork/alreadyusedIp/"
+	Keynode.ContainerNetwork = "/prod/containernetwork/"
+	return  Keynode
+}
+
 func main(){
 	skel.PluginMain(cmdAdd, cmdDel, version.All)
 }
@@ -41,19 +51,11 @@ func cmdAdd(args *skel.CmdArgs) error {
 	var Config IpamConfig
 	var Cli EtcdHelper
 	var Keynode *KeyNode
-
 	//读取配置
 	Config = IpamConfig{}
 	Config.Load(args.StdinData)
 	//连接etcd
 	Cli = Config.etcdConn()
-	//etcd的node节点路劲
-	Keynode = new(KeyNode)
-	//"""KEY节点路劲可抽象(还未实现)"""
-	Keynode.NodeNetwork = "/prod/nodenetwork/"
-	Keynode.AlreadyUsedIp = "/prod/containernetwork/alreadyusedIp/"
-	Keynode.ContainerNetwork = "/prod/containernetwork/"
-	//获取KEY和VALUE,判断必须的KEY是否存在
 	NodeRang := Cli.getKey(Keynode.NodeNetwork)
 	err := IsKeyExist(NodeRang,Keynode.NodeNetwork)
 
@@ -68,7 +70,8 @@ func cmdAdd(args *skel.CmdArgs) error {
 		fmt.Println(err)
 		os.Exit(-1)
 	}
-
+	//etcd KEY路劲
+	Keynode = EtcdKeyRoad()
 	//从etcd获取IP范围
 	var ContainerR *Range
 	ContainerR = &Range{}
@@ -117,8 +120,19 @@ func cmdAdd(args *skel.CmdArgs) error {
 }
 
 func cmdDel(args *skel.CmdArgs) error {
-	fmt.Println("还未实现")
-	return nil
+	var Config IpamConfig
+	var Cli EtcdHelper
+	var Keynode *KeyNode
+	//读取配置
+	Config = IpamConfig{}
+	Config.Load(args.StdinData)
+	//连接etcd
+	Cli = Config.etcdConn()
+	Keynode = EtcdKeyRoad()
+	AlreadUsedIp := Cli.getKey(Keynode.AlreadyUsedIp)
+	fmt.Println(AlreadUsedIp)
+
+
 }
 
 

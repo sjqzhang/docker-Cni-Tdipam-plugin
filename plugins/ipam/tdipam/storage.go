@@ -75,7 +75,6 @@ func (Cli EtcdHelper) setKey (key string,ip string,containerID string) error {
 
 func (Cli EtcdHelper) getKey(key string) (NodesInfo *map[string]string){
 	kapi := client.NewKeysAPI(Cli.Client)
-	//get host
 	resp, err := kapi.Get(context.Background(), key, &client.GetOptions{Recursive: true})
 	if err != nil {
 		log.Fatal(err)
@@ -84,6 +83,15 @@ func (Cli EtcdHelper) getKey(key string) (NodesInfo *map[string]string){
 	skydnsNodesInfo := make(map[string]string)
 	getAllNode(resp.Node, skydnsNodesInfo)
 	return &skydnsNodesInfo
+}
+
+func (Cli EtcdHelper) delKey(key string) {
+	kapi := client.NewKeysAPI(Cli.Client)
+
+	_, err := kapi.Delete(context.Background(), "/foo", &client.DeleteOptions{PrevValue: "bar"})
+	if err != nil {
+		// handle error
+	}
 }
 
 
@@ -96,3 +104,4 @@ func getAllNode(rootNode *client.Node, nodesInfo map[string]string) {
 		getAllNode(rootNode.Nodes[node], nodesInfo)
 	}
 }
+

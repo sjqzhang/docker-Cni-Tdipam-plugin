@@ -48,7 +48,9 @@ func (r *Range) Canonicalize() error {
 		}
 	}
 
-
+	// RangeStart: If specified, make sure it's sane (inside the subnet),
+	// otherwise use the first free IP (i.e. .1) - this will conflict with the
+	// gateway but we skip it in the iterator
 	if r.RangeStart != nil {
 		if err := canonicalizeIP(&r.RangeStart); err != nil {
 			return err
@@ -61,7 +63,8 @@ func (r *Range) Canonicalize() error {
 		r.RangeStart = ip.NextIP(r.Subnet.IP)
 	}
 
-
+	// RangeEnd: If specified, verify sanity. Otherwise, add a sensible default
+	// (e.g. for a /24: .254 if IPv4, ::255 if IPv6)
 	if r.RangeEnd != nil {
 		if err := canonicalizeIP(&r.RangeEnd); err != nil {
 			return err
@@ -77,7 +80,7 @@ func (r *Range) Canonicalize() error {
 	return nil
 }
 
-
+// IsValidIP checks if a given ip is a valid, allocatable address in a given Range
 func (r *Range) Contains(addr net.IP) bool {
 	if err := canonicalizeIP(&addr); err != nil {
 		return false
@@ -85,17 +88,17 @@ func (r *Range) Contains(addr net.IP) bool {
 
 	subnet := (net.IPNet)(r.Subnet)
 
-
+	// Not the same address family
 	if len(addr) != len(r.Subnet.IP) {
 		return false
 	}
 
-
+	// Not in network
 	if !subnet.Contains(addr) {
 		return false
 	}
 
-
+	// We ignore nils here so we can use this function as we initialize the range.
 	if r.RangeStart != nil {
 		// Before the range start
 		if ip.Cmp(addr, r.RangeStart) < 0 {
@@ -119,7 +122,7 @@ func (r *Range) String() string {
 	return fmt.Sprintf("%s-%s", r.RangeStart.String(), r.RangeEnd.String())
 }
 
-
+// canonicalizeIP makes sure a provided ip is in standard form
 func canonicalizeIP(ip *net.IP) error {
 	if ip.To4() != nil {
 		*ip = ip.To4()
@@ -145,6 +148,7 @@ func (r *Range) Overlaps(r1 *Range) bool {
 
 
 
+// Determine the last IP of a subnet, excluding the broadcast if IPv4
 func lastIP(subnet types.IPNet) net.IP {
 	var end net.IP
 	for i := 0; i < len(subnet.IP); i++ {

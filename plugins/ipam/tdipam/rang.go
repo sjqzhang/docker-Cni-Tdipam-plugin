@@ -228,3 +228,13 @@ func (R *Range)RangeSet(AlreadUsedIp *map[string]string,IpList *[]string,Key str
 
 	return nil
 }
+
+func ContainerSearch(AlreadUsedIp *map[string]string,ContainerID string)(string){
+	for k,v := range *AlreadUsedIp{
+		if v == ContainerID {
+			return k
+		}
+	}
+
+	return  ""
+}

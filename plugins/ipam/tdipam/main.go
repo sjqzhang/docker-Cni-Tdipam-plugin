@@ -33,15 +33,6 @@ func (IpamS *IpamConfig) Load(bytes []byte) error {
 	//fmt.Println("type:", reflect.TypeOf(IpamS.Ipam.Etcdcluster))
 }
 
-//etcd的node节点路劲
-func EtcdKeyRoad() *KeyNode{
-	var Keynode *KeyNode
-	Keynode = new(KeyNode)
-	Keynode.NodeNetwork = "/prod/nodenetwork/"
-	Keynode.AlreadyUsedIp = "/prod/containernetwork/alreadyusedIp/"
-	Keynode.ContainerNetwork = "/prod/containernetwork/"
-	return  Keynode
-}
 
 func main(){
 	skel.PluginMain(cmdAdd, cmdDel, version.All)
@@ -50,7 +41,12 @@ func main(){
 func cmdAdd(args *skel.CmdArgs) error {
 	var Config IpamConfig
 	var Cli EtcdHelper
+	//etcd KEY路劲
 	var Keynode *KeyNode
+	Keynode = new(KeyNode)
+	Keynode.NodeNetwork = "/prod/nodenetwork/"
+	Keynode.AlreadyUsedIp = "/prod/containernetwork/alreadyusedIp/"
+	Keynode.ContainerNetwork = "/prod/containernetwork/"
 	//读取配置
 	Config = IpamConfig{}
 	Config.Load(args.StdinData)
@@ -63,15 +59,13 @@ func cmdAdd(args *skel.CmdArgs) error {
 		fmt.Println(err)
 		os.Exit(-1)
 	}
-
 	ContainerRange := Cli.getKey(Keynode.ContainerNetwork)
 	err = IsKeyExist(ContainerRange,Keynode.ContainerNetwork)
 	if err != nil{
 		fmt.Println(err)
 		os.Exit(-1)
 	}
-	//etcd KEY路劲
-	Keynode = EtcdKeyRoad()
+
 	//从etcd获取IP范围
 	var ContainerR *Range
 	ContainerR = &Range{}
@@ -83,14 +77,14 @@ func cmdAdd(args *skel.CmdArgs) error {
 	//获取目前可用的IP地址
 	IpList,err := Hosts((*ContainerRange)[Keynode.ContainerNetwork+ "subNet"])
 	if err != nil{
-		log.Fatal("IP地址范围错误")
+		log.Println("IP地址范围错误")
 	}
 	AvailableIp := ContainerR.RangeSet(AlreadUsedIp,&IpList,Keynode.AlreadyUsedIp)
 	//将获取到的IP提交到ETCD库中(唯一性?)
 
 	err = Cli.setKey(Keynode.AlreadyUsedIp,AvailableIp.String(),args.ContainerID)
 	if err != nil{
-		log.Fatal("无法存入到etcd库中")
+		log.Println("无法存入到etcd库中")
 	}
 	//返回cni相关
 	result := &current.Result{}
@@ -122,17 +116,25 @@ func cmdAdd(args *skel.CmdArgs) error {
 func cmdDel(args *skel.CmdArgs) error {
 	var Config IpamConfig
 	var Cli EtcdHelper
+	//etcd KEY路劲
 	var Keynode *KeyNode
+	Keynode = new(KeyNode)
+	Keynode.NodeNetwork = "/prod/nodenetwork/"
+	Keynode.AlreadyUsedIp = "/prod/containernetwork/alreadyusedIp/"
+	Keynode.ContainerNetwork = "/prod/containernetwork/"
 	//读取配置
 	Config = IpamConfig{}
 	Config.Load(args.StdinData)
 	//连接etcd
 	Cli = Config.etcdConn()
-	Keynode = EtcdKeyRoad()
 	AlreadUsedIp := Cli.getKey(Keynode.AlreadyUsedIp)
-	fmt.Println(AlreadUsedIp)
+	//根据容器ID查找IP
+	Key := ContainerSearch(AlreadUsedIp,args.ContainerID)
+	if len(Key) > 0 {
+		Cli.delKey(Key)
+	}
 
-
+	return nil
 }
 
 

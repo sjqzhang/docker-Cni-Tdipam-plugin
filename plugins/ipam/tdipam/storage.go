@@ -85,13 +85,16 @@ func (Cli EtcdHelper) getKey(key string) (NodesInfo *map[string]string){
 	return &skydnsNodesInfo
 }
 
-func (Cli EtcdHelper) delKey(key string) {
+func (Cli EtcdHelper) delKey(key string) error{
 	kapi := client.NewKeysAPI(Cli.Client)
 
-	_, err := kapi.Delete(context.Background(), "/foo", &client.DeleteOptions{PrevValue: "bar"})
+	//_, err := kapi.Delete(context.Background(), "/foo", &client.DeleteOptions{PrevValue: "bar"})
+	_, err := kapi.Delete(context.Background(), key, &client.DeleteOptions{})
 	if err != nil {
-		// handle error
+		return err
 	}
+	return  nil
+
 }
 
 

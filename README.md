@@ -25,7 +25,7 @@
 * `portmap`: An iptables-based portmapping plugin. Maps ports from the host's address space to the container.
 
 ### 逻辑导图
-![image](https://github.com/panacena/mengqu/blob/master/readme/Screenshot_2016-07-10-22-17- 15_zkk.com.mengqu.png)
+
 
 
 ###我们该如何使用?

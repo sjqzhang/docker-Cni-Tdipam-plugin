@@ -28,7 +28,7 @@
 ![image](https://github.com/xiaoqge/docker-Cni-Tdipam-plugin/blob/master/tdipam.png)
 
 
-###我们该如何使用?
+### 我们该如何使用
 cd plugins
 ./build 将会在bin目录下产生tdipam,将该文件拷贝到插件的目录中.
 

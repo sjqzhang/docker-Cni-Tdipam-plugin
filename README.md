@@ -25,7 +25,11 @@
 * `portmap`: An iptables-based portmapping plugin. Maps ports from the host's address space to the container.
 
 ### 逻辑导图
-![image](https://github.com/panacena/mengqu/blob/master/readme/Screenshot_2016-07-10-22-17- 15_zkk.com.mengqu.png)
+![image](https://github.com/xiaoqge/docker-Cni-Tdipam-plugin/blob/master/tdipam.png)
 
 
 ###我们该如何使用?
+cd plugins
+./build 将会在bin目录下产生tdipam,将该文件拷贝到插件的目录中.
+
+在demo目录下有cnitool的测试脚本以及cni的.conf插件配置文件.

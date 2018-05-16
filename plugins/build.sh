@@ -30,5 +30,5 @@ for d in $PLUGINS; do
 done
 
 
-rm -rf bin/*
-cp -rf bin/* /opt/cni/bin/*
+#rm -rf bin/*
+#cp -rf bin/* /opt/cni/bin/*

@@ -11,12 +11,7 @@ import (
 	"os"
 )
 
-type KeyNode struct {
-	NodeNetwork string
-	ContainerNetwork string
-	AlreadyUsedIp string
 
-}
 
 type EtcdHelper struct {
 	HeaderTimeoutPerRequest   time.Duration
@@ -46,13 +41,12 @@ func (IpamS *IpamConfig) etcdConn() (EtcdConn EtcdHelper){
 }
 
 func IsKeyExist(Rang *map[string]string,Key string) error{
-
-	if _, ok := (*Rang)[Key +"rangeStart"]; !ok {
+	if _, ok := (*Rang)[Key +"RangeStart"]; !ok {
 		return errors.New("ETCD Lack rangeStart")
 	}
 
 
-	if _, ok := (*Rang)[Key +"rangeEnd"]; !ok {
+	if _, ok := (*Rang)[Key +"RangeEnd"]; !ok {
 		return errors.New("ETCD Lack rangeEnd")
 
 	}

@@ -17,6 +17,7 @@ type Range struct {
 	ip 	   []byte
 }
 
+
 // 给定一个IP地址的范围
 func (r *Range) Canonicalize() error {
 	if err := canonicalizeIP(&r.Subnet.IP); err != nil {
@@ -185,21 +186,21 @@ func inc(ip net.IP) {
 }
 
 func (R *Range) Container(ContainerR *map[string]string,Key string) {
-	RangeStart := net.ParseIP((*ContainerR)[Key + "rangeStart"])
+	RangeStart := net.ParseIP((*ContainerR)[Key + "RangeStart"])
 	err := canonicalizeIP(&RangeStart)
 	if err != nil{
 		log.Fatal("Incorrect rangStart address")
 	}
-	RangeEnd := net.ParseIP((*ContainerR)[Key + "rangeEnd"])
+	RangeEnd := net.ParseIP((*ContainerR)[Key + "RangeEnd"])
 	err = canonicalizeIP(&RangeEnd)
 	if err != nil{
 		log.Fatal("Incorrect rangEnd address")
 	}
-	ip, Subnet, err := net.ParseCIDR((*ContainerR)[Key + "subNet"])
+	ip, Subnet, err := net.ParseCIDR((*ContainerR)[Key + "SubNet"])
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Incorrect rangEnd SubNet")
 	}
-	Gateway := net.ParseIP((*ContainerR)[Key + "gateWay"])
+	Gateway := net.ParseIP((*ContainerR)[Key + "GateWay"])
 	err = canonicalizeIP(&Gateway)
 	if err != nil{
 		log.Fatal("Incorrect gateway address")

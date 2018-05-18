@@ -8,7 +8,6 @@ import (
 	"log"
 	"github.com/containernetworking/cni/pkg/types/current"
 	"github.com/containernetworking/cni/pkg/types"
-	"net"
 )
 
 
@@ -102,18 +101,17 @@ func cmdAdd(args *skel.CmdArgs) error {
 	result.IPs = append(result.IPs,IPs)
 	//获取dns配置
 	dnsEtcdConfig := Cli.getKey(Config.Ipam.Dns)
-	GetDns(dnsEtcdConfig)
+	result.DNS = GetDns(dnsEtcdConfig,&Config)
 
-//	dns := &types.DNS{}
-
-
-	//自定义容器路由规则(还未实现)?
-	_, dstmask, err := net.ParseCIDR("0.0.0.0/0")
-	Routes := &types.Route{}
-	Routes.GW = nil
-	Routes.Dst.IP = dstmask.IP
-	Routes.Dst.Mask = dstmask.Mask
-	result.Routes = append(result.Routes,Routes)
+	//自定义容器路由规则
+	routeEtcdConfig := Cli.getKey(Config.Ipam.Routes)
+	GetRoute(routeEtcdConfig,&Config)
+	//_, dstmask, err := net.ParseCIDR("0.0.0.0/0")
+	//Routes := &types.Route{}
+	//Routes.GW = nil
+	//Routes.Dst.IP = dstmask.IP
+	//Routes.Dst.Mask = dstmask.Mask
+	//result.Routes = append(result.Routes,Routes)
 
 
 	return types.PrintResult(result, Config.CNIVersion)

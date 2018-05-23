@@ -18,7 +18,9 @@ const (
 // This implementation is based on flock syscall.
 type FileMutex struct {
 	fd int
+
 }
+
 
 func New(filename string) (*FileMutex, error) {
 	fd, err := syscall.Open(filename, syscall.O_CREAT|syscall.O_RDONLY, mkdirPerm)

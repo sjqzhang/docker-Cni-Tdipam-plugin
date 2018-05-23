@@ -2,21 +2,19 @@ package main
 
 import (
 	"fmt"
-	"net"
 	"github.com/containernetworking/cni/pkg/types"
 	"github.com/containernetworking/plugins/pkg/ip"
 	"log"
+	"net"
 )
-
 
 type Range struct {
 	RangeStart net.IP
 	RangeEnd   net.IP
 	Subnet     types.IPNet
 	Gateway    net.IP
-	ip 	   []byte
+	ip         []byte
 }
-
 
 // 给定一个IP地址的范围
 func (r *Range) Canonicalize() error {
@@ -26,7 +24,6 @@ func (r *Range) Canonicalize() error {
 
 	//不能创建没有网络地址的范围例如掩码为/31和32 位
 	ones, masklen := r.Subnet.Mask.Size()
-
 
 	if ones > masklen-2 {
 		return fmt.Errorf("Network %s too small to allocate from", (*net.IPNet)(&r.Subnet).String())
@@ -107,7 +104,6 @@ func (r *Range) Contains(addr net.IP) bool {
 		}
 	}
 
-
 	if r.RangeEnd != nil {
 		if ip.Cmp(addr, r.RangeEnd) > 0 {
 			// After the  range end
@@ -117,7 +113,6 @@ func (r *Range) Contains(addr net.IP) bool {
 
 	return true
 }
-
 
 func (r *Range) String() string {
 	return fmt.Sprintf("%s-%s", r.RangeStart.String(), r.RangeEnd.String())
@@ -146,8 +141,6 @@ func (r *Range) Overlaps(r1 *Range) bool {
 		r1.Contains(r.RangeStart) ||
 		r1.Contains(r.RangeEnd)
 }
-
-
 
 // Determine the last IP of a subnet, excluding the broadcast if IPv4
 func lastIP(subnet types.IPNet) net.IP {
@@ -185,24 +178,24 @@ func inc(ip net.IP) {
 	}
 }
 
-func (R *Range) Container(ContainerR *map[string]string,Key string) {
-	RangeStart := net.ParseIP((*ContainerR)[Key + "RangeStart"])
+func (R *Range) Container(ContainerR *map[string]string, Key string) {
+	RangeStart := net.ParseIP((*ContainerR)[Key+"RangeStart"])
 	err := canonicalizeIP(&RangeStart)
-	if err != nil{
+	if err != nil {
 		log.Fatal("Incorrect rangStart address")
 	}
-	RangeEnd := net.ParseIP((*ContainerR)[Key + "RangeEnd"])
+	RangeEnd := net.ParseIP((*ContainerR)[Key+"RangeEnd"])
 	err = canonicalizeIP(&RangeEnd)
-	if err != nil{
+	if err != nil {
 		log.Fatal("Incorrect rangEnd address")
 	}
-	ip, Subnet, err := net.ParseCIDR((*ContainerR)[Key + "SubNet"])
+	ip, Subnet, err := net.ParseCIDR((*ContainerR)[Key+"SubNet"])
 	if err != nil {
 		log.Fatal("Incorrect rangEnd SubNet")
 	}
-	Gateway := net.ParseIP((*ContainerR)[Key + "GateWay"])
+	Gateway := net.ParseIP((*ContainerR)[Key+"GateWay"])
 	err = canonicalizeIP(&Gateway)
-	if err != nil{
+	if err != nil {
 		log.Fatal("Incorrect gateway address")
 	}
 	R.RangeStart = RangeStart
@@ -214,28 +207,28 @@ func (R *Range) Container(ContainerR *map[string]string,Key string) {
 
 }
 
-func (R *Range)RangeSet(AlreadUsedIp *map[string]string,IpList *[]string,Key string)(Ip net.IP){
-	for _,Ip := range *IpList{
+func (R *Range) RangeSet(AlreadUsedIp *map[string]string, IpList *[]string, Key string) (ip []net.IP) {
+	var AvailableIpList []net.IP
+	for _, Ip := range *IpList {
 		if _, ok := (*AlreadUsedIp)[Key+Ip]; !ok {
 			ip := net.ParseIP(Ip)
-			if  R.Contains(ip) == true {
-				return ip
-				break
+			if R.Contains(ip) == true {
+				AvailableIpList=append(AvailableIpList,ip)
 			}
 
 		}
 
 	}
 
-	return nil
+	return AvailableIpList
 }
 
-func ContainerSearch(AlreadUsedIp *map[string]string,ContainerID string)(string){
-	for k,v := range *AlreadUsedIp{
+func ContainerSearch(AlreadUsedIp *map[string]string, ContainerID string) string {
+	for k, v := range *AlreadUsedIp {
 		if v == ContainerID {
 			return k
 		}
 	}
 
-	return  ""
+	return ""
 }

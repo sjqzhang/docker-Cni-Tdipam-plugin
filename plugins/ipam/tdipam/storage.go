@@ -1,29 +1,28 @@
 package main
 
 import (
-	"fmt"
-	"github.com/coreos/etcd/client"
-	"time"
-	"strings"
-	"log"
 	"context"
 	"errors"
+	"fmt"
+	"github.com/coreos/etcd/client"
+	"log"
 	"os"
+	"strings"
+	"time"
 )
 
-
-
 type EtcdHelper struct {
-	HeaderTimeoutPerRequest   time.Duration
-	Client           client.Client
+	HeaderTimeoutPerRequest time.Duration
+	Client                  client.Client
 }
 
-func (IpamS *IpamConfig) etcdConn() (EtcdConn EtcdHelper){
+
+func (IpamS *IpamConfig) etcdConn() (EtcdConn EtcdHelper) {
 
 	var etcdServerList []string = strings.Split(IpamS.Ipam.Etcdcluster, ",")
 	cli, err := client.New(client.Config{
-		Endpoints:   etcdServerList,
-		HeaderTimeoutPerRequest: 1* time.Second,
+		Endpoints:               etcdServerList,
+		HeaderTimeoutPerRequest: 1 * time.Second,
 	})
 
 	if err != nil {
@@ -34,40 +33,34 @@ func (IpamS *IpamConfig) etcdConn() (EtcdConn EtcdHelper){
 
 	return EtcdHelper{
 		HeaderTimeoutPerRequest: 1 * time.Second,
-		Client: cli,
-		}
-
+		Client:                  cli,
+	}
 
 }
 
-func IsKeyExist(Rang *map[string]string,Key string) error{
-	if _, ok := (*Rang)[Key +"RangeStart"]; !ok {
+func IsKeyExist(Rang *map[string]string, Key string) error {
+	if _, ok := (*Rang)[Key+"RangeStart"]; !ok {
 		return errors.New("ETCD Lack rangeStart")
 	}
 
-
-	if _, ok := (*Rang)[Key +"RangeEnd"]; !ok {
+	if _, ok := (*Rang)[Key+"RangeEnd"]; !ok {
 		return errors.New("ETCD Lack rangeEnd")
 
 	}
 	return nil
 }
 
-
-
-
-
-func (Cli EtcdHelper) setKey (key string,ip string,containerID string) error {
+func (Cli EtcdHelper) setKey(key string, ip string, containerID string) error {
 	kapi := client.NewKeysAPI(Cli.Client)
-	_, err := kapi.Set(context.Background(), key+ip, containerID, nil)
+	_, err := kapi.Set(context.Background(), key+ip, containerID,&client.SetOptions{PrevExist:client.PrevNoExist})
 	if err != nil {
-		return nil
+		fmt.Println(err)
+		return err
 	}
 	return nil
 }
 
-
-func (Cli EtcdHelper) getKey(key string) (NodesInfo *map[string]string){
+func (Cli EtcdHelper) getKey(key string) (NodesInfo *map[string]string) {
 	kapi := client.NewKeysAPI(Cli.Client)
 	resp, err := kapi.Get(context.Background(), key, &client.GetOptions{Recursive: true})
 	if err != nil {
@@ -79,7 +72,7 @@ func (Cli EtcdHelper) getKey(key string) (NodesInfo *map[string]string){
 	return &skydnsNodesInfo
 }
 
-func (Cli EtcdHelper) delKey(key string) error{
+func (Cli EtcdHelper) delKey(key string) error {
 	kapi := client.NewKeysAPI(Cli.Client)
 
 	//_, err := kapi.Delete(context.Background(), "/foo", &client.DeleteOptions{PrevValue: "bar"})
@@ -87,10 +80,9 @@ func (Cli EtcdHelper) delKey(key string) error{
 	if err != nil {
 		return err
 	}
-	return  nil
+	return nil
 
 }
-
 
 func getAllNode(rootNode *client.Node, nodesInfo map[string]string) {
 	if !rootNode.Dir {
@@ -101,4 +93,3 @@ func getAllNode(rootNode *client.Node, nodesInfo map[string]string) {
 		getAllNode(rootNode.Nodes[node], nodesInfo)
 	}
 }
-

@@ -93,7 +93,9 @@ func cmdAdd(args *skel.CmdArgs) error {
 			break
 		}
 	}
-
+	 if len(AvailableIp.String()) <= 0 {
+	 	log.Fatal("没有可用Ip")
+	 }
 	//返回cni相关
 	result := &current.Result{}
 	//返回cni 版本

@@ -147,14 +147,7 @@ func createMacvlan(conf *NetConf, ifName string, netns ns.NetNS) (*current.Inter
 }
 
 func cmdAdd(args *skel.CmdArgs) error {
-	f, err := os.OpenFile("/tmp/macvlan.log", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalf("error opening file: %v", err)
-	}
-	defer f.Close()
 
-	log.SetOutput(f)
-	log.Println("mac addvlan")
 	n, cniVersion, err := loadConf(args.StdinData)
 	if err != nil {
 		return err
@@ -236,14 +229,7 @@ func cmdAdd(args *skel.CmdArgs) error {
 }
 
 func cmdDel(args *skel.CmdArgs) error {
-	f, err := os.OpenFile("/tmp/macvlanlog", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalf("error opening file: %v", err)
-	}
-	defer f.Close()
 
-	log.SetOutput(f)
-	log.Println("mac delvlan")
 	n, _, err := loadConf(args.StdinData)
 	if err != nil {
 		return err

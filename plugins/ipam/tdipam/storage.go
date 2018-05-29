@@ -49,9 +49,9 @@ func IsKeyExist(Rang *map[string]string, Key string) error {
 	return nil
 }
 
-func (Cli EtcdHelper) setKey(key string, ip string, containerID string) error {
+func (Cli EtcdHelper) setKey(keyRoad string, key string, containerID string) error {
 	kapi := client.NewKeysAPI(Cli.Client)
-	_, err := kapi.Set(context.Background(), key+ip, containerID,&client.SetOptions{PrevExist:client.PrevNoExist})
+	_, err := kapi.Set(context.Background(), keyRoad+key, containerID,&client.SetOptions{PrevExist:client.PrevNoExist})
 	if err != nil {
 		log.Println(err)
 		return err

@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-		"github.com/containernetworking/cni/pkg/skel"
+	"github.com/containernetworking/cni/pkg/skel"
 	"github.com/containernetworking/cni/pkg/types"
 	"github.com/containernetworking/cni/pkg/types/current"
 	"github.com/containernetworking/cni/pkg/version"
@@ -10,7 +10,9 @@ import (
 	"os"
 	"net"
 	"strings"
-)
+	"flag"
+		"io/ioutil"
+	)
 
 type EtcdConfig struct {
 	Etcdcluster      string `json:etcd server地址`
@@ -39,7 +41,66 @@ func (IpamS *IpamConfig) Load(bytes []byte) error {
 }
 
 
-func main() {
+func main(){
+
+	Config := IpamConfig{}
+	//用来初始化etcd里中的配置项，如果默认不用来初始化IP，将执行正常分配IP的流程
+	init := flag.String("init","","init")
+	RangeStart := flag.String("start","","172.20.0.140")
+	RangeEnd := flag.String("end","","172.20.0.150")
+	SubNet := flag.String("subnet","","172.20.0.140/17")
+	GateWay := flag.String("gateway","","172.20.127.254")
+	ConfiFile := flag.String("config","","/etc/cni/net.d/10-macvlan.conf")
+	flag.Parse()
+	if *init == "init"{
+		if contents, err:= ioutil.ReadFile(*ConfiFile);err == nil{
+			Config.Load(contents)
+		}else{
+			log.Fatalf("Lack of configuration files")
+		}
+
+		Cli := Config.etcdConn()
+		start := net.ParseIP(*RangeStart)
+		if start == nil{
+			log.Fatalf("Incorrect rangStart address")
+		} else{
+			err := Cli.setKey(Config.Ipam.Containernetwork,"RangeStart",*RangeStart)
+			if err != nil{
+				log.Fatalf("Create key RangeStart failure")
+			}
+		}
+
+		end := net.ParseIP(*RangeEnd)
+		if end == nil{
+			log.Fatalf("Incorrect rangEnd address")
+		}else{
+			err := Cli.setKey(Config.Ipam.Containernetwork,"RangeEnd",*RangeEnd)
+			if err != nil{
+				log.Fatalf("Create key rangEnd failure")
+			}
+		}
+
+		_, _, err := net.ParseCIDR(*SubNet)
+		if err !=nil {
+			log.Fatal("Incorrect SubNet SubNet")
+		}else{
+			err := Cli.setKey(Config.Ipam.Containernetwork,"SubNet",*SubNet)
+			if err != nil{
+				log.Fatalf("Create key SubNet failure")
+			}
+		}
+
+		gateway := net.ParseIP(*GateWay)
+		if gateway == nil{
+			log.Fatalf("Incorrect gateway address")
+		}else{
+			err := Cli.setKey(Config.Ipam.Containernetwork,"GateWay",*GateWay)
+			if err != nil{
+				log.Fatalf("Create key GateWay failure")
+			}
+		}
+
+	}
 	skel.PluginMain(cmdAdd, cmdDel, version.All)
 }
 

@@ -29,8 +29,8 @@
 
 
 ### 我们该如何使用
-cd plugins
-1. ./build.sh 将会在bin目录下产生tdipam,将编译出来的二进制文件拷贝到kubernetes cni插件目录中 例如/opt/cni/bin
+
+1.  cd plugins && ./build.sh 将会在bin目录下产生tdipam,将编译出来的二进制文件拷贝到kubernetes cni插件目录中 例如/opt/cni/bin
 2. 将demo目录下的10-macvlan.conf文件拷贝到kuberneres 的cni配置文件目录中 例如/etc/cni/net.d/
 3. 首先进行一次IP初始化来确定容器IP的起始和结束范围
 ./tdipam -init init -start 172.20.0.140 -end 172.20.0.150 -subnet 172.20.0.140/17 -gateway 172.20.127.254 -config /etc/cni/net.d/10-macvlan.conf 

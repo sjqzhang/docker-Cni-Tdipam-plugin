@@ -2,14 +2,14 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
-	"github.com/containernetworking/cni/pkg/skel"
+		"github.com/containernetworking/cni/pkg/skel"
 	"github.com/containernetworking/cni/pkg/types"
 	"github.com/containernetworking/cni/pkg/types/current"
 	"github.com/containernetworking/cni/pkg/version"
 	"log"
 	"os"
 	"net"
+	"strings"
 )
 
 type EtcdConfig struct {
@@ -30,7 +30,7 @@ type IpamConfig struct {
 func (IpamS *IpamConfig) Load(bytes []byte) error {
 	err := json.Unmarshal(bytes, IpamS)
 	if err != nil {
-		fmt.Println("error in translating,", err.Error())
+		log.Println("error in translating,", err.Error())
 
 	}
 
@@ -44,6 +44,14 @@ func main() {
 }
 
 func cmdAdd(args *skel.CmdArgs) error {
+	f, err := os.OpenFile("/tmp/ipam.log", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	defer f.Close()
+
+	log.SetOutput(f)
+	log.Println("start ipam...")
 	var Config IpamConfig
 	var Cli EtcdHelper
 
@@ -57,16 +65,40 @@ func cmdAdd(args *skel.CmdArgs) error {
 	//err := IsKeyExist(NodeRang,Config.Ipam.Nodenetwork)
 	//
 	//if err != nil{
-	//	fmt.Println(err)
+	//	log.Println(err)
 	//	os.Exit(-1)
 	//}
 	ContainerRange := Cli.getKey(Config.Ipam.Containernetwork)
-	err := IsKeyExist(ContainerRange, Config.Ipam.Containernetwork)
+	err = IsKeyExist(ContainerRange, Config.Ipam.Containernetwork)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		os.Exit(-1)
 	}
 
+	//获取pod name
+	var podName string
+	Args := strings.Split(args.Args,";")
+	for _, as := range Args{
+		if strings.Contains(as,"K8S_POD_NAME"){
+			pods := strings.Split(as,"=")
+			podName = pods[len(pods)-1]
+
+		}
+	}
+
+	//从etcd库中pod_name是否已经存在Ip，如果存在，则不需要再从新分配IP,并且将新的容器ID写入etcd
+	var AvailableIp net.IP
+	if len(podName) > 0 {
+		existPodName := Cli.getKey(Config.Ipam.Alreadyusedip + "podname/")
+		log.Println(podName)
+		if existIp, ok := (*existPodName)[Config.Ipam.Alreadyusedip + "podname/"+podName]; ok {
+			AvailableIp = net.ParseIP(existIp)
+			err = Cli.setKey(Config.Ipam.Alreadyusedip, AvailableIp.String(), args.ContainerID)
+			if err != nil {
+				log.Println(err)
+			}
+		}
+	}
 
 	//从etcd获取容器IP范围
 	var ContainerR *Range
@@ -81,21 +113,29 @@ func cmdAdd(args *skel.CmdArgs) error {
 	if err != nil {
 		log.Println("IP地址范围错误")
 	}
-	AvailableIpList := ContainerR.RangeSet(AlreadUsedIp, &IpList, Config.Ipam.Alreadyusedip)
-	//将获取到的IP提交到ETCD库中
-	var AvailableIp net.IP
-	for _, Ip := range AvailableIpList {
-		if len(Ip.String()) > 0 {
-			err = Cli.setKey(Config.Ipam.Alreadyusedip, Ip.String(), args.ContainerID)
+
+	//如果etcd中不存在IP则分配IP
+	if AvailableIp == nil {
+		AvailableIpList := ContainerR.RangeSet(AlreadUsedIp, &IpList, Config.Ipam.Alreadyusedip)
+		//将获取到的IP提交到ETCD库中
+
+		for _, Ip := range AvailableIpList {
+			if len(Ip.String()) > 0 {
+				err = Cli.setKey(Config.Ipam.Alreadyusedip, Ip.String(), args.ContainerID)
+			}
+			if err == nil {
+				AvailableIp = Ip
+				err = Cli.setKey(Config.Ipam.Alreadyusedip+"podname/", podName, Ip.String())
+				if err != nil {
+					log.Println(err)
+				}
+				break
+			}
 		}
-		if err == nil {
-			AvailableIp = Ip
-			break
+		if len(AvailableIp.String()) <= 0 {
+			log.Println("没有可用Ip")
 		}
 	}
-	 if len(AvailableIp.String()) <= 0 {
-	 	log.Fatal("没有可用Ip")
-	 }
 	//返回cni相关
 	result := &current.Result{}
 	//返回cni 版本
@@ -115,13 +155,12 @@ func cmdAdd(args *skel.CmdArgs) error {
 	//自定义容器路由规则
 	//routeEtcdConfig := Cli.getKey(Config.Ipam.Routes)
 	//GetRoute(routeEtcdConfig, &Config)
-	_, dstmask, err := net.ParseCIDR("0.0.0.0/0")
-	Routes := &types.Route{}
-	Routes.GW = nil
-	Routes.Dst.IP = dstmask.IP
-	Routes.Dst.Mask = dstmask.Mask
-	result.Routes = append(result.Routes,Routes)
-
+	//_, dstmask, err := net.ParseCIDR("0.0.0.0/0")
+	//Routes := &types.Route{}
+	//Routes.GW = nil
+	//Routes.Dst.IP = dstmask.IP
+	//Routes.Dst.Mask = dstmask.Mask
+	//result.Routes = append(result.Routes,Routes)
 	return types.PrintResult(result, Config.CNIVersion)
 
 }
@@ -131,15 +170,48 @@ func cmdDel(args *skel.CmdArgs) error {
 	var Cli EtcdHelper
 	//etcd KEY路劲
 	//读取配置
+	f, err := os.OpenFile("/tmp/stopipam.log", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	defer f.Close()
+
+	log.SetOutput(f)
+
 	Config = IpamConfig{}
 	Config.Load(args.StdinData)
-	//连接etcd
 	Cli = Config.etcdConn()
 	AlreadUsedIp := Cli.getKey(Config.Ipam.Alreadyusedip)
+
+	//连接etcd
+	for k,v := range *AlreadUsedIp {
+		if v == args.ContainerID{
+			log.Println(args.ContainerID)
+			log.Println("delete key")
+			Cli.delKey(k)
+		}
+	}
+
 	//根据容器ID查找IP
 	Key := ContainerSearch(AlreadUsedIp, args.ContainerID)
 	if len(Key) > 0 {
+		log.Println("delete ip key")
 		Cli.delKey(Key)
+	}
+	//获取pod name
+	var podName string
+	Args := strings.Split(args.Args,";")
+	for _, as := range Args{
+		if strings.Contains(as,"K8S_POD_NAME"){
+			pods := strings.Split(as,"=")
+			podName = pods[len(pods)-1]
+
+		}
+	}
+	//删除podname
+	if len(podName) > 0 {
+		log.Println("delete" + Config.Ipam.Alreadyusedip + "podname/" + podName)
+		Cli.delKey(Config.Ipam.Alreadyusedip + "podname/" + podName)
 	}
 
 	return nil

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="134f7210-38d5-40ca-81f0-14cfa102544a" name="192.168.201.128" url="http://192.168.201.128">
-        <fileTransfer host="192.168.201.128" port="22" privateKey="$USER_HOME$/.ssh/id_rsa" rootFolder="/opt/cni/docker-Cni-Tdipam-plugin" accessType="SFTP" keyPair="true">
+      <webServer id="134f7210-38d5-40ca-81f0-14cfa102544a" name="192.168.201.132" url="http://192.168.201.132">
+        <fileTransfer host="192.168.201.132" port="22" privateKey="$USER_HOME$/.ssh/id_rsa" rootFolder="/opt/cni/docker-Cni-Tdipam-plugin" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
           </advancedOptions>

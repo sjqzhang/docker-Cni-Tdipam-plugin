@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"errors"
-	"fmt"
 	"github.com/coreos/etcd/client"
 	"log"
 	"os"
@@ -26,7 +25,7 @@ func (IpamS *IpamConfig) etcdConn() (EtcdConn EtcdHelper) {
 	})
 
 	if err != nil {
-		fmt.Println("connect failed, err:", err)
+		log.Println("connect failed, err:", err)
 		os.Exit(-1)
 
 	}
@@ -54,7 +53,7 @@ func (Cli EtcdHelper) setKey(key string, ip string, containerID string) error {
 	kapi := client.NewKeysAPI(Cli.Client)
 	_, err := kapi.Set(context.Background(), key+ip, containerID,&client.SetOptions{PrevExist:client.PrevNoExist})
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return err
 	}
 	return nil

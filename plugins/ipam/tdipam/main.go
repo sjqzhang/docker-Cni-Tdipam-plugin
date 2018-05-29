@@ -105,22 +105,21 @@ func main(){
 }
 
 func cmdAdd(args *skel.CmdArgs) error {
-	f, err := os.OpenFile("/tmp/ipam.log", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalf("error opening file: %v", err)
-	}
-	defer f.Close()
+	//f, err := os.OpenFile("/tmp/ipam.log", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
+	//if err != nil {
+	//	log.Fatalf("error opening file: %v", err)
+	//}
+	//defer f.Close()
+	//
+	//log.SetOutput(f)
+	//log.Println("start ipam...")
 
-	log.SetOutput(f)
-	log.Println("start ipam...")
-	var Config IpamConfig
-	var Cli EtcdHelper
 
 	//读取配置
-	Config = IpamConfig{}
+	Config := IpamConfig{}
 	Config.Load(args.StdinData)
 	//连接etcd
-	Cli = Config.etcdConn()
+	Cli := Config.etcdConn()
 
 	//NodeRang := Cli.getKey(Config.Ipam.Nodenetwork)
 	//err := IsKeyExist(NodeRang,Config.Ipam.Nodenetwork)
@@ -130,7 +129,7 @@ func cmdAdd(args *skel.CmdArgs) error {
 	//	os.Exit(-1)
 	//}
 	ContainerRange := Cli.getKey(Config.Ipam.Containernetwork)
-	err = IsKeyExist(ContainerRange, Config.Ipam.Containernetwork)
+	err := IsKeyExist(ContainerRange, Config.Ipam.Containernetwork)
 	if err != nil {
 		log.Println(err)
 		os.Exit(-1)
@@ -227,21 +226,19 @@ func cmdAdd(args *skel.CmdArgs) error {
 }
 
 func cmdDel(args *skel.CmdArgs) error {
-	var Config IpamConfig
-	var Cli EtcdHelper
 	//etcd KEY路劲
 	//读取配置
-	f, err := os.OpenFile("/tmp/stopipam.log", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalf("error opening file: %v", err)
-	}
-	defer f.Close()
+	//f, err := os.OpenFile("/tmp/stopipam.log", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
+	//if err != nil {
+	//	log.Fatalf("error opening file: %v", err)
+	//}
+	//defer f.Close()
+	//
+	//log.SetOutput(f)
 
-	log.SetOutput(f)
-
-	Config = IpamConfig{}
+	Config := IpamConfig{}
 	Config.Load(args.StdinData)
-	Cli = Config.etcdConn()
+	Cli := Config.etcdConn()
 	AlreadUsedIp := Cli.getKey(Config.Ipam.Alreadyusedip)
 
 	//连接etcd

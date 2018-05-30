@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14363202-d557-4e96-a51b-b22cdad40a3c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/demo/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins/ipam/tdipam/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/ipam/tdipam/demo/10-macvlan.conf" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/demo/10-macvlan.conf" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,12 +13,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/demo/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="195">
-                <caret line="13" column="87" selection-start-line="13" selection-start-column="87" selection-end-line="13" selection-end-column="87" />
+              <first_editor relative-caret-position="105">
+                <caret line="7" column="22" lean-forward="true" selection-end-line="23" />
               </first_editor>
               <second_editor />
             </state>
@@ -33,6 +30,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
               <caret line="16" lean-forward="true" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="600">
+                <caret line="40" column="62" selection-start-line="40" selection-start-column="62" selection-end-line="40" selection-end-column="62" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -65,9 +74,9 @@
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/rang.go" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/main.go" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/storage.go" />
-        <option value="$PROJECT_DIR$/plugins/ipam/tdipam/README.md" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/demo/10-macvlan.conf" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/demo/README.md" />
+        <option value="$PROJECT_DIR$/plugins/ipam/tdipam/README.md" />
       </list>
     </option>
   </component>
@@ -379,7 +388,7 @@
         <observation name="typedSelect" value="63.0" />
       </dailyData>
       <dailyData date="30-5-2018">
-        <observation name="cancelled" value="166.0" />
+        <observation name="cancelled" value="168.0" />
       </dailyData>
     </factor>
     <factor id="completionType">
@@ -410,7 +419,7 @@
         <observation name="count" value="657.0" />
       </dailyData>
       <dailyData date="30-5-2018">
-        <observation name="count" value="166.0" />
+        <observation name="count" value="168.0" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:explicitProximity">
@@ -1046,14 +1055,6 @@
             <path>
               <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
               <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="plugins" type="462c0819:PsiDirectoryNode" />
-              <item name="ipam" type="462c0819:PsiDirectoryNode" />
-              <item name="tdipam" type="462c0819:PsiDirectoryNode" />
-              <item name="demo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -1129,7 +1130,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527648016272" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527648498444" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1153,7 +1154,7 @@
       </Profilers>
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527648016273" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527648498444" />
       </method>
     </configuration>
     <configuration name="go build docker-Cni-Tdipam-plugin/" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
@@ -1188,12 +1189,12 @@
       <workItem from="1527060563074" duration="164000" />
       <workItem from="1527060894166" duration="14139000" />
       <workItem from="1527490424812" duration="32343000" />
-      <workItem from="1527594505641" duration="4228000" />
+      <workItem from="1527594505641" duration="4701000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52089000" />
+    <option name="totallyTimeSpent" value="52562000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-145" y="-1057" width="1920" height="977" extended-state="0" />
@@ -1416,16 +1417,6 @@
     <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/demo/env.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="525">
-            <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/demo/docker-run.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1436,6 +1427,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/demo/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="105">
+            <caret line="7" column="22" lean-forward="true" selection-end-line="23" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/demo/10-macvlan.conf">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1443,11 +1444,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/demo/README.md">
+    <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="195">
-            <caret line="13" column="87" selection-start-line="13" selection-start-column="87" selection-end-line="13" selection-end-column="87" />
+          <first_editor relative-caret-position="600">
+            <caret line="40" column="62" selection-start-line="40" selection-start-column="62" selection-end-line="40" selection-end-column="62" />
           </first_editor>
           <second_editor />
         </state>

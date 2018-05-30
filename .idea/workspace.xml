@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14363202-d557-4e96-a51b-b22cdad40a3c" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/demo/10-macvlan.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/demo/docker-run.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/demo/env.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/demo/exec-plugins.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/demo/priv-net-run.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/demo/release.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/tdipam.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/tdipam" beforeDir="false" afterPath="$PROJECT_DIR$/bin/tdipam" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/ipam/tdipam/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/ipam/tdipam/storage.go" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/storage.go" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,11 +21,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
+            <state relative-caret-position="600">
+              <caret line="52" column="26" lean-forward="true" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="525">
+                <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/demo/docker-run.sh">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/demo/10-macvlan.conf">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="66" selection-start-line="8" selection-start-column="66" selection-end-line="8" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -28,11 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/storage.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="20" selection-start-line="20" selection-end-line="27" />
-              <folding>
-                <element signature="e#14#110#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="95">
+              <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -83,6 +111,8 @@
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/rang.go" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/main.go" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/storage.go" />
+        <option value="$PROJECT_DIR$/plugins/ipam/tdipam/README.md" />
+        <option value="$PROJECT_DIR$/plugins/ipam/tdipam/demo/10-macvlan.conf" />
       </list>
     </option>
   </component>
@@ -393,6 +423,9 @@
         <observation name="explicitSelect" value="122.0" />
         <observation name="typedSelect" value="63.0" />
       </dailyData>
+      <dailyData date="30-5-2018">
+        <observation name="cancelled" value="55.0" />
+      </dailyData>
     </factor>
     <factor id="completionType">
       <dailyData date="23-5-2018">
@@ -420,6 +453,9 @@
       </dailyData>
       <dailyData date="29-5-2018">
         <observation name="count" value="657.0" />
+      </dailyData>
+      <dailyData date="30-5-2018">
+        <observation name="count" value="55.0" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:explicitProximity">
@@ -1037,67 +1073,6 @@
             <path>
               <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
               <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="gopath" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="gopath" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="github.com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="gopath" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="github.com" type="462c0819:PsiDirectoryNode" />
-              <item name="coreos" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="gopath" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="github.com" type="462c0819:PsiDirectoryNode" />
-              <item name="coreos" type="462c0819:PsiDirectoryNode" />
-              <item name="etcd" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="gopath" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="github.com" type="462c0819:PsiDirectoryNode" />
-              <item name="coreos" type="462c0819:PsiDirectoryNode" />
-              <item name="etcd" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="gopath" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="github.com" type="462c0819:PsiDirectoryNode" />
-              <item name="coreos" type="462c0819:PsiDirectoryNode" />
-              <item name="etcd" type="462c0819:PsiDirectoryNode" />
-              <item name="pkg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="gopath" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="github.com" type="462c0819:PsiDirectoryNode" />
-              <item name="coreos" type="462c0819:PsiDirectoryNode" />
-              <item name="etcd" type="462c0819:PsiDirectoryNode" />
-              <item name="pkg" type="462c0819:PsiDirectoryNode" />
-              <item name="transport" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
               <item name="plugins" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -1139,6 +1114,14 @@
               <item name="plugins" type="462c0819:PsiDirectoryNode" />
               <item name="ipam" type="462c0819:PsiDirectoryNode" />
               <item name="tdipam" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="ipam" type="462c0819:PsiDirectoryNode" />
+              <item name="tdipam" type="462c0819:PsiDirectoryNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
@@ -1190,6 +1173,11 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/plugins/ipam/tdipam" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -1225,7 +1213,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527645930227" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527647473551" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1249,7 +1237,7 @@
       </Profilers>
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527645930237" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527647473552" />
       </method>
     </configuration>
     <configuration name="go build docker-Cni-Tdipam-plugin/" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
@@ -1284,12 +1272,12 @@
       <workItem from="1527060563074" duration="164000" />
       <workItem from="1527060894166" duration="14139000" />
       <workItem from="1527490424812" duration="32343000" />
-      <workItem from="1527594505641" duration="2901000" />
+      <workItem from="1527594505641" duration="3724000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50762000" />
+    <option name="totallyTimeSpent" value="51585000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-145" y="-1057" width="1920" height="977" extended-state="0" />
@@ -1488,13 +1476,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gopath/src/github.com/coreos/etcd/client/client.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-59">
-          <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gopath/src/github.com/coreos/etcd/pkg/transport/listener.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -1502,20 +1483,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gopath/src/github.com/coreos/etcd/client/client.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-59">
+          <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/storage.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="20" selection-start-line="20" selection-end-line="27" />
-          <folding>
-            <element signature="e#14#110#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="95">
+          <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
+        <state relative-caret-position="600">
+          <caret line="52" column="26" lean-forward="true" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/demo/env.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="525">
+            <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/demo/docker-run.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/demo/10-macvlan.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="66" selection-start-line="8" selection-start-column="66" selection-end-line="8" selection-end-column="66" />
         </state>
       </provider>
     </entry>

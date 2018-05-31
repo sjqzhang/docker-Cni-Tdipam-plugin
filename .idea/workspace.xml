@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14363202-d557-4e96-a51b-b22cdad40a3c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/tdipam" beforeDir="false" afterPath="$PROJECT_DIR$/bin/tdipam" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/ipam/tdipam/demo/10-macvlan.conf" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/demo/10-macvlan.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/ipam/tdipam/dns.go" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/dns.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/ipam/tdipam/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/ipam/tdipam/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins/ipam/tdipam/storage.go" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/storage.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ipam/tdipam/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ipam/tdipam/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,14 +13,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="61" column="55" lean-forward="true" selection-start-line="61" selection-start-column="55" selection-end-line="61" selection-end-column="55" />
+            <state relative-caret-position="384">
+              <caret line="61" column="65" lean-forward="true" selection-start-line="61" selection-start-column="65" selection-end-line="61" selection-end-column="72" />
               <folding>
                 <element signature="e#14#296#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="315">
+                <caret line="21" column="156" selection-start-line="21" selection-start-column="156" selection-end-line="21" selection-end-column="156" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -84,12 +89,12 @@
         <option value="$PROJECT_DIR$/plugins/main/macvlan/macvlan.go" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/rang.go" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/demo/README.md" />
-        <option value="$PROJECT_DIR$/plugins/ipam/tdipam/README.md" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/demo/10-macvlan.conf" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/dns.go" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/storage.go" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/routes.go" />
         <option value="$PROJECT_DIR$/plugins/ipam/tdipam/main.go" />
+        <option value="$PROJECT_DIR$/plugins/ipam/tdipam/README.md" />
       </list>
     </option>
   </component>
@@ -518,7 +523,7 @@
         <observation name="explicitSelect" value="1.0" />
       </dailyData>
       <dailyData date="31-5-2018">
-        <observation name="cancelled" value="225.0" />
+        <observation name="cancelled" value="254.0" />
         <observation name="explicitSelect" value="64.0" />
         <observation name="typedSelect" value="58.0" />
       </dailyData>
@@ -560,7 +565,7 @@
         <observation name="count" value="227.0" />
       </dailyData>
       <dailyData date="31-5-2018">
-        <observation name="count" value="347.0" />
+        <observation name="count" value="376.0" />
       </dailyData>
     </factor>
     <factor id="doubleFeature:explicitProximity">
@@ -1419,11 +1424,6 @@
             <path>
               <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
               <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="bin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="docker-Cni-Tdipam-plugin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="docker-Cni-Tdipam-plugin" type="462c0819:PsiDirectoryNode" />
               <item name="demo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -1530,7 +1530,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527764649651" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527765008520" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -1554,7 +1554,7 @@
       </Profilers>
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527764649652" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527765008521" />
       </method>
     </configuration>
     <configuration name="go build docker-Cni-Tdipam-plugin/" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
@@ -1590,18 +1590,18 @@
       <workItem from="1527060894166" duration="14139000" />
       <workItem from="1527490424812" duration="32343000" />
       <workItem from="1527594505641" duration="8307000" />
-      <workItem from="1527745855617" duration="13123000" />
+      <workItem from="1527745855617" duration="13482000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69291000" />
+    <option name="totallyTimeSpent" value="69650000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-145" y="-1057" width="1920" height="977" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2747604" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2747604" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -1610,7 +1610,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49840257" visible="true" weight="0.18983051" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49840257" visible="true" weight="0.18983051" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49946752" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1790,16 +1790,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="405">
-            <caret line="27" column="64" lean-forward="true" selection-end-line="27" selection-end-column="64" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/demo/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1852,16 +1842,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/routes.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
-          <folding>
-            <element signature="e#14#81#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/dns.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -1879,13 +1859,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/routes.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="40" selection-start-line="15" selection-start-column="40" selection-end-line="15" selection-end-column="40" />
+          <folding>
+            <element signature="e#14#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="61" column="55" lean-forward="true" selection-start-line="61" selection-start-column="55" selection-end-line="61" selection-end-column="55" />
+        <state relative-caret-position="384">
+          <caret line="61" column="65" lean-forward="true" selection-start-line="61" selection-start-column="65" selection-end-line="61" selection-end-column="72" />
           <folding>
             <element signature="e#14#296#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plugins/ipam/tdipam/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="315">
+            <caret line="21" column="156" selection-start-line="21" selection-start-column="156" selection-end-line="21" selection-end-column="156" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

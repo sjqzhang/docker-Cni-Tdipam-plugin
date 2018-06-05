@@ -114,7 +114,7 @@ func main(){
 			nameservers := strings.Split(*Nameservrs, ",")
 			for i,servers := range nameservers{
 				if net.ParseIP(servers) != nil {
-					Cli.setKey(Config.Ipam.Dns,strconv.Itoa(i),servers)
+					Cli.setKey(Config.Ipam.Dns+"nameservers",strconv.Itoa(i),servers)
 				} else{
 				log.Fatalf("Create key nameservers failure")
 				}
@@ -145,14 +145,14 @@ func main(){
 }
 
 func cmdAdd(args *skel.CmdArgs) error {
-	//f, err := os.OpenFile("/tmp/ipam.log", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
-	//if err != nil {
-	//	log.Fatalf("error opening file: %v", err)
-	//}
-	//defer f.Close()
-	//
-	//log.SetOutput(f)
-	//log.Println("start ipam...")
+	f, err := os.OpenFile("/tmp/ipam.log", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	defer f.Close()
+
+	log.SetOutput(f)
+	log.Println("start ipam...")
 
 
 	//读取配置
@@ -162,7 +162,7 @@ func cmdAdd(args *skel.CmdArgs) error {
 	Cli := Config.etcdConn()
 
 	ContainerRange := Cli.getKey(Config.Ipam.Containernetwork)
-	err := IsKeyExist(ContainerRange, Config.Ipam.Containernetwork)
+	err = IsKeyExist(ContainerRange, Config.Ipam.Containernetwork)
 	if err != nil {
 		log.Println(err)
 		os.Exit(-1)
@@ -248,6 +248,7 @@ func cmdAdd(args *skel.CmdArgs) error {
 	//自定义容器路由规则
 	routeEtcdConfig := Cli.getKey(Config.Ipam.Routes)
 	result.Routes = GetRoute(routeEtcdConfig)
+	log.Println(result)
 	return types.PrintResult(result, Config.CNIVersion)
 
 }
